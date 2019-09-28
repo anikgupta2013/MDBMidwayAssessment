@@ -11,7 +11,7 @@ import UIKit
 extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         /* PART 2B START */
-        return 2019201
+        return arrayOfSnaps.count
         /* PART 2B FINISH */
     }
     
@@ -28,7 +28,11 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         /* PART 2C START */
+        cell.awakeFromNib()
+        cell.senderLabel?.text = arrayOfSnaps[index].sender
 
+        cell.dateSentLabel?.text = formatter.string(from: arrayOfSnaps[index].timeSent)
+        cell.hasBeenOpenedSquare.layer.backgroundColor = UIColor.red.cgColor
         /* PART 2C FINISH*/
         return cell
     }
@@ -36,7 +40,9 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var index = indexPath[1]
         /* PART 2D START */
-        
+        var selectedSnap = arrayOfSnaps[index]
+        selectedImage = SnapImage.init(sentBy: selectedSnap.sender, sentTo: selectedSnap.sentTo, timeSent: selectedSnap.timeSent, image: selectedSnap.image)
+        performSegue(withIdentifier: "toShowImage", sender: self)
         /* PART 2D FINISH */
     }
     

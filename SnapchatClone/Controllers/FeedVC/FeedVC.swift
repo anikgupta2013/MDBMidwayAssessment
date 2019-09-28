@@ -53,7 +53,13 @@ class FeedVC: UIViewController {
     
     func setupTableView() {
         /* PART 2A START */
-    
+        
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        tableView.center = CGPoint.init(x: view.frame.width/2, y: view.frame.height/2)
+        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "feedCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
         /* PART 2A FINISH */
     }
     

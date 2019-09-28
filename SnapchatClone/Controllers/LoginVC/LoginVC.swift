@@ -54,6 +54,18 @@ class LoginVC: UIViewController {
         var email = "wubba@lubbadubdub.com"
         var password = "ImMrMeeseeks"
         /* PART 1A START*/
+        email = emailTextField.text!
+        if email == "" {
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Missing email", message: "Please include a valid email.")
+            return
+        }
+        password = passwordTextField.text!
+        if password == "" {
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Missing password", message: "Please include your password.")
+            return
+        }
         
         /* PART 1A FINISH*/
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
@@ -77,7 +89,30 @@ class LoginVC: UIViewController {
         var email = "wubba@lubbadubdub.com"
         var password = "ImMrMeeseeks"
         /* PART 1B START*/
-        
+        name = nameTextField.text!
+        if name == "" {
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Missing email", message: "Please include your name.")
+            return
+        }
+        number = phoneNumberTextField.text!
+        if number == "" {
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Missing phone number", message: "Please include your phone number.")
+            return
+        }
+        email = emailTextField.text!
+        if email == "" {
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Missing email", message: "Please include a valid email.")
+            return
+        }
+        password = passwordTextField.text!
+        if password == "" {
+            self.loginRegisterButton.isUserInteractionEnabled = true
+            self.displayAlert(title: "Missing password", message: "Please include your password.")
+            return
+        }
         /* PART 1B FINISH*/
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
@@ -129,7 +164,9 @@ class LoginVC: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         /* PART 1C START*/
-        
+        if let feedVC = segue.destination as? FeedVC {
+            feedVC.userID = ourUserID
+        }
         /* PART 1C FINISH*/
     }
 }
